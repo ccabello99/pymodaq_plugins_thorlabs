@@ -1,3 +1,4 @@
+from typing import Union, List, Dict, Tuple
 from pymodaq.control_modules.move_utility_classes import (
     DAQ_Move_base, comon_parameters_fun, main, DataActuatorType, DataActuator)
 from pymodaq.utils.daq_utils import ThreadCommand
@@ -18,10 +19,11 @@ class DAQ_Move_KIM101(DAQ_Move_base):
          hardware library.
 
     """
-    _controller_units = KIM101.default_units
+
     is_multiaxes = True
-    _axes_names = {'1': 1, '2': 2, '3': 3, '4': 4}
-    _epsilon = 0.01
+    _controller_units = KIM101.default_units
+    _axes_names: Union[List[str], Dict[str, int]] = {'1': 1, '2': 2, '3': 3, '4': 4}
+    _epsilon: Union[float, List[float]] = [0.01, 0.01, 0.01, 0.01]
     data_actuator_type = DataActuatorType.DataActuator
     params = [
                  {'title': 'Serial Number:', 'name': 'serial_number', 'type': 'list',
